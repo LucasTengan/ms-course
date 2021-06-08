@@ -8,14 +8,18 @@
         <version>2.3.11.RELEASE</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
+
     <groupId>com.tengan</groupId>
     <artifactId>hr-worker</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>hr-worker</name>
-    <description>Demo project for Spring Boot</description>
+
+    <description>Worker Microservice</description>
+
     <properties>
         <java.version>11</java.version>
     </properties>
+
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
