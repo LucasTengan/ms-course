@@ -31,7 +31,7 @@ public class WorkerResource {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Worker> findAll(@PathVariable Long id) {
+    public ResponseEntity<Worker> findById(@PathVariable Long id) {
         Worker worker = workerService.findByIdOrThrowException(id);
 
         return new ResponseEntity<>(worker, HttpStatus.OK);
