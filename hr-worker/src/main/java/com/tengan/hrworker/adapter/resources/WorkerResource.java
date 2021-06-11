@@ -4,6 +4,7 @@ import com.tengan.hrworker.application.WorkerService;
 import com.tengan.hrworker.domain.entities.Worker;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +19,10 @@ import java.util.List;
 @RequestMapping("/workers")
 public class WorkerResource {
 
-    private static Logger logger = LoggerFactory.getLogger(WorkerResource.class);
+    private static final Logger logger = LoggerFactory.getLogger(WorkerResource.class);
+
+    @Value("${test.config}")
+    private String testConfig;
 
     private final Environment environment;
     private final WorkerService workerService;
@@ -26,6 +30,13 @@ public class WorkerResource {
     public WorkerResource(Environment environment, WorkerService workerService) {
         this.environment = environment;
         this.workerService = workerService;
+    }
+
+    @GetMapping("/configs")
+    public ResponseEntity<Void> getConfigs() {
+        logger.info("CONFIG = " + testConfig);
+
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     @GetMapping
