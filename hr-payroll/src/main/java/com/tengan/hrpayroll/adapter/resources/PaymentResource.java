@@ -1,5 +1,6 @@
 package com.tengan.hrpayroll.adapter.resources;
 
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import com.tengan.hrpayroll.application.services.PaymentService;
 import com.tengan.hrpayroll.domain.entities.Payment;
 import org.springframework.http.HttpStatus;
@@ -19,10 +20,16 @@ public class PaymentResource {
         this.paymentService = paymentService;
     }
 
+    @HystrixCommand(fallbackMethod = "getPaymentAlternative")
     @GetMapping("/{workerId}/days/{days}")
     public ResponseEntity<Payment> getPayment(@PathVariable Long workerId, @PathVariable Integer days) {
         Payment payment = paymentService.getPayment(workerId, days);
 
+        return new ResponseEntity<>(payment, HttpStatus.OK);
+    }
+
+    public ResponseEntity<Payment> getPaymentAlternative(Long workerId, Integer days) {
+        Payment payment = new Payment("Brann", 400.0, days);
         return new ResponseEntity<>(payment, HttpStatus.OK);
     }
 }
