@@ -23,22 +23,12 @@ public class WorkerResource {
 
     private static final Logger logger = LoggerFactory.getLogger(WorkerResource.class);
 
-    @Value("${test.config}")
-    private String testConfig;
-
     private final Environment environment;
     private final WorkerService workerService;
 
     public WorkerResource(Environment environment, WorkerService workerService) {
         this.environment = environment;
         this.workerService = workerService;
-    }
-
-    @GetMapping("/configs")
-    public ResponseEntity<Void> getConfigs() {
-        logger.info("CONFIG = " + testConfig);
-
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     @GetMapping
